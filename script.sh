@@ -1,24 +1,35 @@
 #!/usr/bin/env bash
 # Sun Mar 22 14:00:50 IST 2026
 
+# -----------------------------------------------------------------------------
+# ComfyUI + LTX-2 Auto Setup Script
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# Clean Previous Installation (if exists)
+# -----------------------------------------------------------------------------
 cd /
 rm -rf /app/ComfyUI
 
+
+# -----------------------------------------------------------------------------
+# Clone ComfyUI Repository
+# -----------------------------------------------------------------------------
 git clone https://github.com/Comfy-Org/ComfyUI.git
 cd ComfyUI
 
+# -----------------------------------------------------------------------------
+# Install Python Dependencies
+# -----------------------------------------------------------------------------
+
 # pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-
-
 # pip install numpy==1.26.4
-
 
 pip install -r requirements.txt
 
 
-###############################################################################
-# DOWNLOAD HELPER
-###############################################################################
+# -----------------------------------------------------------------------------
+# Download Helper Function
+# -----------------------------------------------------------------------------
 download () {
   local url="$1"; local out="$2"
   if [ ! -f "$out" ]; then
@@ -33,11 +44,15 @@ download () {
   fi
 }
 
+# -----------------------------------------------------------------------------
+# Create Model Directories
+# -----------------------------------------------------------------------------
+echo "[INFO] Creating model directories..."
 mkdir -p /ComfyUI/models/{checkpoints,text_encoders,loras,upscale_models}
 
-###############################################################################
-# LTX-2 DOWNLOADS
-###############################################################################
+# -----------------------------------------------------------------------------
+# Download LTX-2 Models
+# -----------------------------------------------------------------------------
 
 # MAIN MODEL
 download "https://huggingface.co/Lightricks/LTX-2/resolve/main/ltx-2-19b-dev-fp8.safetensors" \
@@ -56,9 +71,10 @@ download "https://huggingface.co/Lightricks/LTX-2/resolve/main/ltx-2-spatial-ups
            "/ComfyUI/models/latent_upscale_models/ltx-2-spatial-upscaler-x2-1.0.safetensors"
 
 
-###############################################################################
-# 6. LAUNCH SERVICES
-###############################################################################
+# -----------------------------------------------------------------------------
+# Launch Services
+# -----------------------------------------------------------------------------
+
 echo "[INFO] Launching ComfyUI + Jupyter..."
 cd /ComfyUI
 
@@ -69,4 +85,5 @@ jupyter lab \
   --ServerApp.trust_xheaders=True \
   --ServerApp.allow_origin='*' &
 
+# Start ComfyUI
 python3 main.py --listen 0.0.0.0 --port 8188
