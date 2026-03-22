@@ -2,6 +2,12 @@
 
 This repository provides a **fully automated setup** for running **ComfyUI with LTX-2 video model** on GPU environments (e.g., RunPod, AWS, local CUDA machines).
 
+**LTX-2** is the first DiT-based audio-video foundation model that contains all core capabilities of modern video generation in one model: synchronized audio and video, high fidelity, multiple performance modes, production-ready outputs, API access, and open access.
+
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/4414adc0-086c-43de-b367-9362eeb20228" width="70%" poster=""> </video>
+</div>
+
 It installs:
 
 * ComfyUI (latest)
@@ -125,6 +131,19 @@ You can:
 * API wrapper
 * Multi-GPU support
 * Persistent volumes
+
+
+## 📚 References
+
+This project builds upon and integrates the following open-source projects:
+
+* 🔗 **ComfyUI-LTX2 Repository**
+  https://github.com/Shudh25/ComfyUI-LTX2.git
+  → Custom setup, automation scripts, and deployment configuration for LTX-2
+
+* 🔗 **ComfyUI (Official Repository)**
+  https://github.com/Comfy-Org/ComfyUI.git
+  → Core node-based UI framework powering the workflow engine
 
 ---
 
